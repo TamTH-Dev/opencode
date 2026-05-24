@@ -72,7 +72,7 @@ This multi-agent architecture: **one orchestrator, many specialists**. Instead o
 | orchestrator (PLAN) | All (no edit/bash) | `opencode-go/deepseek-v4-pro` | 0.2 | Plan-only orchestrator |
 | orchestrator (FAST) | All (limited) | `opencode-go/deepseek-v4-flash` | 0.2 | Fast orchestrator |
 | planner | All (no edit/bash) | `opencode-go/deepseek-v4-pro` | 0.2 | Standalone planning |
-| editor | write_file, str_replace | `opencode-go/kimi-k2.6` | 0 | Implements changes |
+| editor | write_file, str_replace | `opencode-go/qwen3.6-plus` | 0 | Implements changes |
 | refactorer | edit, bash, read, task | `opencode-go/glm-5.1` | 0 | Safe refactoring |
 | general-agent | Full tool access | `opencode-go/kimi-k2.6` | 0.1 | General purpose |
 | debugger | bash, read, grep | `opencode-go/kimi-k2.6` | 0.1 | Debugging |
@@ -191,7 +191,7 @@ Bug Report
 
 ### Model Assignment Guidelines
 - **Thinkers/Planners** → Strongest reasoning models (MiMo-V2.5-Pro, DeepSeek V4 Pro, Kimi K2.6)
-- **Code Editors** → Best coding + instruction following at temperature 0 (Kimi K2.6)
+- **Code Editors** → Best coding + instruction following at temperature 0 (Qwen3.6 Plus)
 - **Reviewers** → Stable analytical models at low temperature (MiniMax M2.7, DeepSeek V4 Pro)
 - **Fast/Light tasks** → Deterministic fast models (DeepSeek V4 Flash, MiniMax M2.5)
 - **File Discovery** → Lightweight fast models (DeepSeek V4 Flash)
