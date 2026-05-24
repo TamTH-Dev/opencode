@@ -28,7 +28,7 @@ cp -r path/to/agents/* .opencode/agents/
   "agent": {
     "orchestrator": {
       "mode": "primary",
-      "model": "moonshot/kimi-k2.6",
+      "model": "opencode-go/kimi-k2.6",
       "temperature": 0.1,
       "color": "primary",
       "permission": {
@@ -48,7 +48,7 @@ cp -r path/to/agents/* .opencode/agents/
     },
     "orchestrator-plan": {
       "mode": "primary",
-      "model": "deepseek/deepseek-v4-pro",
+      "model": "opencode-go/deepseek-v4-pro",
       "temperature": 0.2,
       "color": "warning",
       "permission": {
@@ -67,7 +67,7 @@ cp -r path/to/agents/* .opencode/agents/
     },
     "orchestrator-fast": {
       "mode": "primary",
-      "model": "deepseek/deepseek-v4-flash",
+      "model": "opencode-go/deepseek-v4-flash",
       "temperature": 0.2,
       "color": "success",
       "permission": {
@@ -126,23 +126,23 @@ Override models for specific agents to balance cost vs. quality. All models belo
 {
   "agent": {
     "thinker": {
-      "model": "xiaomi/mimo-v2.5-pro",
+      "model": "opencode-go/mimo-v2.5-pro",
       "temperature": 0.1
     },
     "editor": {
-      "model": "moonshot/kimi-k2.6",
+      "model": "opencode-go/kimi-k2.6",
       "temperature": 0
     },
     "code-reviewer": {
-      "model": "minimax/minimax-m2.7",
+      "model": "opencode-go/minimax-m2.7",
       "temperature": 0.1
     },
     "file-picker": {
-      "model": "deepseek/deepseek-v4-flash",
+      "model": "opencode-go/deepseek-v4-flash",
       "temperature": 0.1
     },
     "basher": {
-      "model": "deepseek/deepseek-v4-flash",
+      "model": "opencode-go/deepseek-v4-flash",
       "temperature": 0
     }
   }
@@ -158,7 +158,7 @@ Configure all four modes as primary agents that you can cycle through with Tab:
   "agent": {
     "orchestrator": {
       "mode": "primary",
-      "model": "moonshot/kimi-k2.6",
+      "model": "opencode-go/kimi-k2.6",
       "temperature": 0.1,
       "permission": {
         "edit": "allow",
@@ -168,7 +168,7 @@ Configure all four modes as primary agents that you can cycle through with Tab:
     },
     "orchestrator-max": {
       "mode": "primary",
-      "model": "xiaomi/mimo-v2.5-pro",
+      "model": "opencode-go/mimo-v2.5-pro",
       "temperature": 0.1,
       "permission": {
         "edit": "allow",
@@ -178,7 +178,7 @@ Configure all four modes as primary agents that you can cycle through with Tab:
     },
     "orchestrator-fast": {
       "mode": "primary",
-      "model": "deepseek/deepseek-v4-flash",
+      "model": "opencode-go/deepseek-v4-flash",
       "temperature": 0.2,
       "permission": {
         "edit": "allow",
@@ -188,7 +188,7 @@ Configure all four modes as primary agents that you can cycle through with Tab:
     },
     "orchestrator-plan": {
       "mode": "primary",
-      "model": "deepseek/deepseek-v4-pro",
+      "model": "opencode-go/deepseek-v4-pro",
       "temperature": 0.2,
       "permission": {
         "edit": "deny",
@@ -244,17 +244,17 @@ Only these models are available for assignment in `provider/model-name` format:
 
 | Model ID | Best For | Key Strength |
 |----------|----------|--------------|
-| `zhipu/glm-5.1` | Refactoring, browser automation | Autonomous engineering loops, 200K context |
+| `opencode-go/glm-5.1` | Refactoring, browser automation | Autonomous engineering loops, 200K context |
 | `moonshot/kimi-k2.5` | Lightweight tasks | Agent swarm (100 sub-agents) |
-| `moonshot/kimi-k2.6` | Orchestration, editing, debugging, general | SWE-bench Verified 80.2%, 1T MoE (32B active), 256K context |
+| `opencode-go/kimi-k2.6` | Orchestration, editing, debugging, general | SWE-bench Verified 80.2%, 1T MoE (32B active), 256K context |
 | `xiaomi/mimo-v2.5` | Lightweight agentic tasks | 1M context, good efficiency |
-| `xiaomi/mimo-v2.5-pro` | Deep reasoning, MAX mode, thinking | 1.02T MoE (42B active), 1M context, token-efficient |
-| `minimax/minimax-m2.5` | Code search, test running, docs, CLI, librarian | SWE-bench 80.2%, extremely cost-effective, fast |
-| `minimax/minimax-m2.7` | Code review, context pruning | Agent-native, deeper reasoning, SWE-bench ~78% |
+| `opencode-go/mimo-v2.5-pro` | Deep reasoning, MAX mode, thinking | 1.02T MoE (42B active), 1M context, token-efficient |
+| `opencode-go/minimax-m2.5` | Code search, test running, docs, CLI, librarian | SWE-bench 80.2%, extremely cost-effective, fast |
+| `opencode-go/minimax-m2.7` | Code review, context pruning | Agent-native, deeper reasoning, SWE-bench ~78% |
 | `qwen/qwen3.5-plus` | Lightweight research | Baseline performance |
 | `qwen/qwen3.6-plus` | Web research | 1M context, hybrid thinking, cost-effective |
-| `deepseek/deepseek-v4-pro` | Planning, security review, PLAN mode | 1.6T MoE (49B active), strongest analytical reasoning |
-| `deepseek/deepseek-v4-flash` | FAST mode, file picking, bash, fast operations | 284B MoE (13B active), fastest (100+ tokens/sec), cheapest |
+| `opencode-go/deepseek-v4-pro` | Planning, security review, PLAN mode | 1.6T MoE (49B active), strongest analytical reasoning |
+| `opencode-go/deepseek-v4-flash` | FAST mode, file picking, bash, fast operations | 284B MoE (13B active), fastest (100+ tokens/sec), cheapest |
 
 ## Cost-Optimized Configuration
 
@@ -264,23 +264,23 @@ For a budget-conscious setup:
 {
   "agent": {
     "orchestrator": {
-      "model": "deepseek/deepseek-v4-flash",
+      "model": "opencode-go/deepseek-v4-flash",
       "temperature": 0.2
     },
     "orchestrator-max": {
-      "model": "minimax/minimax-m2.5",
+      "model": "opencode-go/minimax-m2.5",
       "temperature": 0.1
     },
     "file-picker": {
-      "model": "deepseek/deepseek-v4-flash",
+      "model": "opencode-go/deepseek-v4-flash",
       "temperature": 0.1
     },
     "basher": {
-      "model": "deepseek/deepseek-v4-flash",
+      "model": "opencode-go/deepseek-v4-flash",
       "temperature": 0
     },
     "code-reviewer": {
-      "model": "minimax/minimax-m2.5",
+      "model": "opencode-go/minimax-m2.5",
       "temperature": 0.1
     },
     "editor": {

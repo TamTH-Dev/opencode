@@ -51,40 +51,40 @@ This multi-agent system architecture: **one orchestrator, many specialists**. In
 ### Analysis-Focused (Read-Only, No Edits)
 | Agent | Tools | Model | Temperature | Purpose |
 |-------|-------|-------|-------------|---------|
-| file-picker | list, glob, read, grep | `deepseek/deepseek-v4-flash` | 0.1 | Fuzzy file discovery |
-| code-searcher | grep | `minimax/minimax-m2.5` | 0 | Mechanical code search |
+| file-picker | list, glob, read, grep | `opencode-go/deepseek-v4-flash` | 0.1 | Fuzzy file discovery |
+| code-searcher | grep | `opencode-go/minimax-m2.5` | 0 | Mechanical code search |
 | researcher-web | websearch, webfetch | `qwen/qwen3.6-plus` | 0.3 | Web research |
-| researcher-docs | webfetch | `minimax/minimax-m2.5` | 0.2 | Documentation research |
-| thinker | NONE | `xiaomi/mimo-v2.5-pro` | 0.1 | Deep reasoning |
-| librarian | bash | `minimax/minimax-m2.5` | 0.1 | Clone & explore repos |
+| researcher-docs | webfetch | `opencode-go/minimax-m2.5` | 0.2 | Documentation research |
+| thinker | NONE | `opencode-go/mimo-v2.5-pro` | 0.1 | Deep reasoning |
+| librarian | bash | `opencode-go/minimax-m2.5` | 0.1 | Clone & explore repos |
 
 ### Review-Focused (Read-Only Text Feedback)
 | Agent | Tools | Model | Temperature | Purpose |
 |-------|-------|-------|-------------|---------|
-| code-reviewer | read-only | `minimax/minimax-m2.7` | 0.1 | Code review (standard/fast/multi-perspective) |
-| security-reviewer | read-only | `deepseek/deepseek-v4-pro` | 0 | Security review |
+| code-reviewer | read-only | `opencode-go/minimax-m2.7` | 0.1 | Code review (standard/fast/multi-perspective) |
+| security-reviewer | read-only | `opencode-go/deepseek-v4-pro` | 0 | Security review |
 
 ### Execution-Focused (Can Edit)
 | Agent | Tools | Model | Temperature | Purpose |
 |-------|-------|-------|-------------|---------|
-| orchestrator (DEFAULT) | All | `moonshot/kimi-k2.6` | 0.1 | Primary orchestrator |
-| orchestrator (MAX) | All | `xiaomi/mimo-v2.5-pro` | 0.1 | Deep context orchestrator |
-| orchestrator (PLAN) | All (no edit/bash) | `deepseek/deepseek-v4-pro` | 0.2 | Plan-only orchestrator |
-| orchestrator (FAST) | All (limited) | `deepseek/deepseek-v4-flash` | 0.2 | Fast orchestrator |
-| planner | All (no edit/bash) | `deepseek/deepseek-v4-pro` | 0.2 | Standalone planning |
-| editor | write_file, str_replace | `moonshot/kimi-k2.6` | 0 | Implements changes |
-| refactorer | edit, bash, read, task | `zhipu/glm-5.1` | 0 | Safe refactoring |
-| general-agent | Full tool access | `moonshot/kimi-k2.6` | 0.1 | General purpose |
-| debugger | bash, read, grep | `moonshot/kimi-k2.6` | 0.1 | Debugging |
+| orchestrator (DEFAULT) | All | `opencode-go/kimi-k2.6` | 0.1 | Primary orchestrator |
+| orchestrator (MAX) | All | `opencode-go/mimo-v2.5-pro` | 0.1 | Deep context orchestrator |
+| orchestrator (PLAN) | All (no edit/bash) | `opencode-go/deepseek-v4-pro` | 0.2 | Plan-only orchestrator |
+| orchestrator (FAST) | All (limited) | `opencode-go/deepseek-v4-flash` | 0.2 | Fast orchestrator |
+| planner | All (no edit/bash) | `opencode-go/deepseek-v4-pro` | 0.2 | Standalone planning |
+| editor | write_file, str_replace | `opencode-go/kimi-k2.6` | 0 | Implements changes |
+| refactorer | edit, bash, read, task | `opencode-go/glm-5.1` | 0 | Safe refactoring |
+| general-agent | Full tool access | `opencode-go/kimi-k2.6` | 0.1 | General purpose |
+| debugger | bash, read, grep | `opencode-go/kimi-k2.6` | 0.1 | Debugging |
 
 ### Tool-Oriented (Specialized)
 | Agent | Tools | Model | Temperature | Purpose |
 |-------|-------|-------|-------------|---------|
-| basher | bash | `deepseek/deepseek-v4-flash` | 0 | Run commands |
-| test-runner | bash, read, grep | `minimax/minimax-m2.5` | 0.1 | Test management |
-| tmux-cli | bash, read | `minimax/minimax-m2.5` | 0.1 | Interactive CLI testing |
-| browser-use | bash, webfetch | `zhipu/glm-5.1` | 0.2 | Browser testing |
-| context-pruner | read-only | `minimax/minimax-m2.7` | 0.1 | Context management (hidden) |
+| basher | bash | `opencode-go/deepseek-v4-flash` | 0 | Run commands |
+| test-runner | bash, read, grep | `opencode-go/minimax-m2.5` | 0.1 | Test management |
+| tmux-cli | bash, read | `opencode-go/minimax-m2.5` | 0.1 | Interactive CLI testing |
+| browser-use | bash, webfetch | `opencode-go/glm-5.1` | 0.2 | Browser testing |
+| context-pruner | read-only | `opencode-go/minimax-m2.7` | 0.1 | Context management (hidden) |
 
 ## Delegation Rules
 
