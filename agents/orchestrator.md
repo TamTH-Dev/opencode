@@ -153,9 +153,10 @@ Keep final summaries extremely concise: write only a few words for each change m
 # Agent Selection Rules
 
 ## When to use each agent
-- **file-picker** → broad exploration (unknown codebase, “find where X might be”)
-- **code-searcher** → precise pattern search (grep for exact strings/regex)
-  *Often run both in parallel during initial exploration.*
+- **file-picker** → fuzzy discovery. It *may* grep, but its strength is understanding layout.
+  Do NOT use it to find every occurrence of a symbol — spawn @code-searcher for that.
+- **code-searcher** → mechanical, exhaustive grep. It does NOT understand the codebase;
+  it only returns pattern matches. Use it when you know exactly what to search for.
 - **researcher-web** → external libraries, recent best practices, blog posts
 - **researcher-docs** → official documentation of well‑known tools (React, Postgres, etc.)
   *Can be spawned in parallel with researcher-web.*
