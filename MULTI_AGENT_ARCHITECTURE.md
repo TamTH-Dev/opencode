@@ -1,8 +1,8 @@
-# Multi-Agent Architecture — OpenCode Implementation (Role-Based)
+# Multi-Agent Architecture (Role-Based)
 
 ## Philosophy
 
-This multi-agent system architecture: **one orchestrator, many specialists**. Instead of using one model for everything, we coordinate specialized agents that work together to understand your project and make precise changes. Each agent has a **role-based name** — model assignment belongs exclusively in frontmatter, not filenames.
+This multi-agent architecture: **one orchestrator, many specialists**. Instead of using one model for everything, we coordinate specialized agents that work together to understand your project and make precise changes. Each agent has a **role-based name** — model assignment belongs exclusively in frontmatter, not filenames.
 
 ## Agent Hierarchy
 
@@ -53,7 +53,7 @@ This multi-agent system architecture: **one orchestrator, many specialists**. In
 |-------|-------|-------|-------------|---------|
 | file-picker | list, glob, read, grep | `opencode-go/deepseek-v4-flash` | 0.1 | Fuzzy file discovery |
 | code-searcher | grep | `opencode-go/minimax-m2.5` | 0 | Mechanical code search |
-| researcher-web | websearch, webfetch | `qwen/qwen3.6-plus` | 0.3 | Web research |
+| researcher-web | websearch, webfetch | `opencode-go/qwen3.6-plus` | 0.3 | Web research |
 | researcher-docs | webfetch | `opencode-go/minimax-m2.5` | 0.2 | Documentation research |
 | thinker | NONE | `opencode-go/mimo-v2.5-pro` | 0.1 | Deep reasoning |
 | librarian | bash | `opencode-go/minimax-m2.5` | 0.1 | Clone & explore repos |
@@ -220,7 +220,7 @@ All agent files are in `~/.config/opencode/agents/` (global) or `.opencode/agent
 - `researcher-web.md` — Web research — Qwen3.6 Plus
 - `researcher-docs.md` — Documentation research — MiniMax M2.5
 - `thinker.md` — Deep reasoning (no tools) — MiMo-V2.5-Pro
-- `editor.md` — Code implementation — Kimi K2.6
+- `editor.md` — Code implementation — Qwen3.6 Plus
 - `code-reviewer.md` — Code review (unified: standard/fast/multi-perspective) — MiniMax M2.7
 - `basher.md` — Terminal command runner — DeepSeek V4 Flash
 - `tmux-cli.md` — Interactive CLI testing — MiniMax M2.5

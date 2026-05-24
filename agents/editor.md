@@ -1,7 +1,7 @@
 ---
 description: 'Expert code editor that implements changes using write_file and str_replace. Spawn for non-trivial implementations. Inherits full conversation context. Supports both direct editing and best-of-N multi-strategy editing. Model-agnostic role-based design.'
 mode: subagent
-model: opencode-go/kimi-k2.6
+model: opencode-go/qwen3.6-plus
 temperature: 0
 permission:
   edit: allow
