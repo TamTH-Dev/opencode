@@ -1,0 +1,124 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": [],
+  "mcp": {
+    "gitnexus": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "gitnexus@latest",
+        "mcp"
+      ]
+      // If gitnexus has been installed globally by `npm i -g gitnexus`, switch to: ["gitnexus", "mcp"]
+    }
+  },
+  "instructions": [
+    // Local / project rules
+    "AGENTS.md",
+    ".cursor/rules/**/*.md",
+    ".cursor/rules/**/*.mdc",
+    ".claude/rules/**/*.md",
+    // Global / personal rules
+    "{env:HOME}/.claude/rules/**/*.md",
+    "{env:HOME}/.cursor/rules/**/*.md",
+    "{env:HOME}/.cursor/rules/**/*.mdc",
+    "{env:HOME}/.config/opencode/rules/**/*.md"
+  ],
+  "permission": {
+    "edit": "ask",
+    "webfetch": "ask",
+    "websearch": "allow",
+    // Prevent agent from touching anything outside the project
+    "external_directory": "ask",
+    // Control subagent spawning if you use complex agent hierarchies
+    "task": "allow",
+    // If you have potentially destructive skills installed
+    "skill": "ask",
+    "bash": {
+      "*": "ask",
+      // Read-only inspection — safe to allow
+      "ls": "allow",
+      "ls *": "allow",
+      "cat *": "allow",
+      "pwd": "allow",
+      "echo *": "allow",
+      "grep *": "allow",
+      "rg *": "allow",
+      "find *": "allow",
+      "head *": "allow",
+      "tail *": "allow",
+      "wc *": "allow",
+      "which *": "allow",
+      "file *": "allow",
+      "tree": "allow",
+      "tree *": "allow",
+      // Git read-only
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "git branch": "allow",
+      "git branch -*": "allow",
+      "git show*": "allow",
+      "git remote -v": "allow",
+      "git ls-files*": "allow",
+      "git rev-parse*": "allow",
+      // Git destructive — explicitly ask even though "*" catches them, for clarity
+      "git push*": "ask",
+      "git reset --hard*": "ask",
+      "git clean *": "ask",
+      "git checkout -- *": "ask",
+      "git commit --amend*": "ask",
+      "git rebase*": "ask",
+      // Package managers — every install runs lifecycle scripts
+      "npm install*": "ask",
+      "npm i *": "ask",
+      "bun install*": "ask",
+      "bun i *": "ask",
+      "pnpm install*": "ask",
+      "yarn install*": "ask",
+      "pip install*": "ask",
+      "uv add*": "ask",
+      // npx/bunx are arbitrary remote code execution — treat seriously
+      "npx *": "ask",
+      "bunx *": "ask",
+      "pnpm dlx *": "ask",
+      // Docker — effectively arbitrary code
+      "docker run*": "ask",
+      "docker exec*": "ask",
+      "docker compose up*": "ask",
+      // Shell escape attempts — don't let these slip past
+      "eval *": "deny",
+      "bash -c *": "ask",
+      "sh -c *": "ask",
+      "zsh -c *": "ask",
+      // Network → shell pipes
+      "curl * | *sh*": "deny",
+      "wget * | *sh*": "deny",
+      "curl *|*sh*": "deny",
+      // Hard denies — destructive enough to never want
+      "rm -rf *": "deny",
+      "rm -rf /": "deny",
+      "rm -rf ~*": "deny",
+      "sudo *": "deny",
+      "mkfs*": "deny",
+      "dd if=*": "deny",
+      ":(){ *": "deny"
+    }
+  },
+  "compaction": {
+    "auto": true,
+    "prune": true,
+    "reserved": 10000
+  },
+  "watcher": {
+    "ignore": [
+      "node_modules/**",
+      "dist/**",
+      "build/**",
+      ".next/**",
+      ".git/**",
+      ".gitnexus/**"
+    ]
+  }
+}
