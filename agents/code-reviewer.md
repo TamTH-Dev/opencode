@@ -57,13 +57,22 @@ Review from these perspectives:
 - **Performance:** Any obvious performance concerns? N+1 queries, memory leaks, unnecessary allocations?
 - **Style:** Does it match existing code style and conventions?
 
+# Review Scope
+
+**Only review the code that was actually changed.** Do not review entire files unless the change is a full rewrite.
+
+- **Focus on the diff.** If a `git diff` is available (the orchestrator may provide it), use that as your primary reference. If not, infer the changes from the conversation history and by comparing with the current state of the files (look for recently modified sections).
+- **Review the changed lines and their immediate surroundings** (a few lines above and below) to assess correctness in context.
+- **If the change has knock‑on effects** on other parts of the codebase (e.g., modifying an exported function signature), **note the affected areas** but do not review those other files in depth unless they are also part of the diff.
+- **Concentrate on what matters:** correctness, safety, convention compliance, and completeness — not formatting or style that the linter will catch.
+
 # Process
 
 Before providing your review, use <think> tags to think through the changes and identify issues.
 
-1. Read the changes being reviewed
+1. Read the changes being reviewed — focus on the diff, not the whole file
 2. Select the appropriate review mode based on the context (default: standard)
-3. Identify issues - focus on what needs to change, not what's good
+3. Identify issues — focus on what needs to change, not what's good
 4. Provide clear, actionable feedback
 
 # Critical Rules
