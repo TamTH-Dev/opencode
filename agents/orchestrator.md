@@ -89,9 +89,17 @@ When a subagent fails, a command exits non‑zero, or validation returns issues,
 
 - **Subagent failure or unclear output:** Analyze the error. Adjust the prompt or parameters to give clearer instructions, then retry **once**.
 - **Second failure:** Report the exact problem to the user, include relevant context, and ask for guidance. Do not keep retrying blindly.
-- **Typecheck / lint failure after edit:** Do NOT blindly retry the edit. Instead, spawn `@debugger` to isolate the cause, then fix the issue.
-- **Test failure (from @test-runner or manual):** Spawn `@debugger` before attempting any fix. Do not attempt multiple “guess” edits.
-- **Review feedback (from @code-reviewer or @security-reviewer):** Address all actionable items before re‑validating. If feedback is unclear, ask the reviewer to clarify (re‑spawn with a more targeted prompt).
+
+- **Typecheck / lint failure after edit:** Do NOT blindly retry the edit. Instead, spawn `@debugger` to isolate the cause, then fix the issue. After fixing, loop back to **step 4 (Implement)**.
+
+- **Test failure (from @test-runner or manual):** Spawn `@debugger` before attempting any fix. Do not attempt multiple “guess” edits. After debugging and fixing, loop back to **step 4 (Implement)**.
+
+- **Review feedback (from @code-reviewer or @security-reviewer):**  
+  - For style, convention, or completeness issues, apply the fix directly and loop back to **step 4 (Implement)**.  
+  - If the feedback identifies a **logic error, unexpected behaviour, or potential bug**, spawn `@debugger` first to confirm the root cause. Then fix the issue and loop back to **step 4 (Implement)**.  
+  - If the feedback is unclear, re‑spawn the reviewer with a more targeted prompt to get clarification before fixing.
+
+- **Re‑validation after any fix:** After every fix, re‑run the validation that failed (typecheck, lint, review, tests). Continue only once that step passes.
 
 # When to Ask the User
 
@@ -124,8 +132,8 @@ Do **NOT** ask about: file names, variable names, formatting preferences, or tri
 - **@basher**: Terminal command runner. Pass command in params. Use for typechecks, tests, lints.
 - **@tmux-cli**: Interactive CLI testing via tmux sessions. Use for programs that need interactive input (REPLs, menus, etc.).
 - **@browser-use**: Browser automation for web testing via Chrome DevTools. Use for end-to-end testing of web applications or anything requiring a real browser.
-- **@general-agent**: General purpose agent for complex standalone tasks.
-- **@librarian**: Clone and explore external GitHub repositories. Use to understand third-party code or libraries by exploring their source.
+- **@general-agent**: Limited fallback for complex standalone tasks (no shell, no sub‑agent spawning). Avoid for routine work; prefer specialized agents.
+- **@librarian**: Clone and explore external GitHub repositories (trusted, well‑known repos only). The librarian will refuse untrusted sources.
 - **@security-reviewer**: Security-focused code review (read-only).
 - **@debugger**: Debugging specialist. Use for reproducing and isolating bugs.
 - **@refactorer**: Safe refactoring specialist. Use for structural changes like renaming symbols, extracting methods, or moving files. It verifies all references before applying changes.
@@ -180,7 +188,11 @@ Keep final summaries extremely concise: write only a few words for each change m
 4. **Implement** → @editor for new code, @refactorer for structural changes, or direct `str_replace` for trivial 1‑2 line fixes.  
 5. **Validate** → @basher (typecheck/lint) + @code-reviewer (parallel). Add @security-reviewer if security‑sensitive code was touched.  
 6. **Test** → @test-runner (if tests exist). Can run in parallel with validation if tests are independent.  
-7. **Fix** → Apply Error Recovery rules; loop back to step 4 maximum 2 times.  
+7. **Fix** — If any validation or test step fails:
+   a. Spawn `@debugger` if the failure indicates a bug, logic error, or test failure.
+   b. Implement the fix (via `@editor` / `@refactorer` / direct edit).
+   c. Re‑run the validation steps that failed.
+   d. Loop back to step 4 at most **2 times**. If issues persist after two loops, pause and ask the user for guidance.
 
 ## Extra rules
 - **Never skip review** unless the change is a single, trivial, non‑security line.
