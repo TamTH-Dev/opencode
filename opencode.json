@@ -10,11 +10,6 @@
     ]
   ],
   "mcp": {
-    "gitnexus": {
-      "type": "local",
-      "command": ["npx", "-y", "gitnexus@latest", "mcp"]
-      // If gitnexus has been installed globally by `npm i -g gitnexus`, switch to: ["gitnexus", "mcp"]
-    }
   },
   "instructions": [
     // Local / project rules
